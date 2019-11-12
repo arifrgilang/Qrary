@@ -5,6 +5,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.rz.qrary.R
+import com.rz.qrary.fragments.BooksFragment
+import com.rz.qrary.fragments.HistoryFragment
+import com.rz.qrary.fragments.ProfileFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -19,10 +22,16 @@ private val TAB_TITLES = arrayOf(
 class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
+    private val fragments = listOf(
+        ProfileFragment(),
+        BooksFragment(),
+        HistoryFragment()
+    )
+
     override fun getItem(position: Int): Fragment {
         // getItem is called to instantiate the fragment for the given page.
         // Return a PlaceholderFragment (defined as a static inner class below).
-        return PlaceholderFragment.newInstance(position + 1)
+        return fragments[position]
     }
 
     override fun getPageTitle(position: Int): CharSequence? {
@@ -31,6 +40,6 @@ class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
 
     override fun getCount(): Int {
         // Show 2 total pages.
-        return 3
+        return fragments.size
     }
 }
