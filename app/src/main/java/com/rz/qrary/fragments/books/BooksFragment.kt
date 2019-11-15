@@ -50,7 +50,8 @@ class BooksFragment : Fragment() {
 
         viewModel.getArticle().observe(this, Observer { articles ->
             if(articles != null){
-                rvAdapter = BooksRVAdapter(articles)
+                rvAdapter = BooksRVAdapter(articles, activity!!.applicationContext)
+                Log.d("BooksFragment", articles.toString())
                 rv.adapter = rvAdapter
                 rvAdapter.notifyDataSetChanged()
                 swipeLayout.isRefreshing = false
