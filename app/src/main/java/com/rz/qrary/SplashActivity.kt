@@ -17,17 +17,11 @@ class SplashActivity : AppCompatActivity() {
         setContentView(R.layout.activity_splash)
 
         val fadeAnim = AnimationUtils.loadAnimation(this, R.anim.fade_in)
-        logo_splash.startAnimation((fadeAnim))
+        splash_logo.startAnimation((fadeAnim))
 
         Handler().postDelayed({
-            val intent =  Intent(this, LoginActivity::class.java)
-//            intent.putExtra(LoginActivity.EXT)
-            val options = ActivityOptionsCompat
-                .makeSceneTransitionAnimation(this, logo_splash, "qrary_logo")
-
-            startActivity(intent, options.toBundle())
-            ActivityCompat.finishAfterTransition(this)
-//            finish()
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
         }, 2000)
     }
 }
