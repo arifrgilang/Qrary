@@ -36,7 +36,7 @@ class ProfileFragment : Fragment() {
                 a.removeView(qrView)
             }
             alertDialog
-                .setTitle("QR Code")
+                .setTitle("*digunakan saat akan meminjam buku")
                 .setView(qrView)
                 .create().show()
         }

@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.rz.qrary.R
-import com.rz.qrary.fragments.BooksFragment
+import com.rz.qrary.fragments.books.BooksFragment
 import com.rz.qrary.fragments.HistoryFragment
 import com.rz.qrary.fragments.ProfileFragment
 
