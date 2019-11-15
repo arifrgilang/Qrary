@@ -8,6 +8,8 @@
     tools:context=".SplashActivity">
 
     <ImageView
+        android:id="@+id/logo_splash"
+        android:transitionName="qrary_logo"
         android:layout_width="250dp"
         android:layout_height="250dp"
         android:src="@drawable/logo_qrary"
