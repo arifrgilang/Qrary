@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.cardview.widget.CardView
+import androidx.core.view.marginBottom
 
 import com.rz.qrary.R
 
@@ -25,14 +26,19 @@ class ProfileFragment : Fragment() {
         imageView.setImageResource(R.drawable.qr)
 
         val alertDialog = AlertDialog.Builder(activity)
-            .setMessage("QR Code")
-            .setView(imageView)
-            .create()
         val factory = LayoutInflater.from(activity!!.applicationContext)
         val qrView = factory.inflate(R.layout.qr_zoomed, null)
-//        alertDialog.setView(qrView)
+
         cardQR.setOnClickListener{
-            alertDialog.show()
+            // to remove error showing
+            if(qrView.parent != null){
+                val a = qrView.parent as ViewGroup
+                a.removeView(qrView)
+            }
+            alertDialog
+                .setTitle("QR Code")
+                .setView(qrView)
+                .create().show()
         }
         return view
     }
