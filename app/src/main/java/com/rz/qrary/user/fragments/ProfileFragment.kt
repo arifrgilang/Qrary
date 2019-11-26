@@ -1,4 +1,4 @@
-package com.rz.qrary.fragments
+package com.rz.qrary.user.fragments
 
 import android.app.AlertDialog
 import android.os.Bundle

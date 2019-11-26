@@ -1,4 +1,4 @@
-package com.rz.qrary.fragments
+package com.rz.qrary.user.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

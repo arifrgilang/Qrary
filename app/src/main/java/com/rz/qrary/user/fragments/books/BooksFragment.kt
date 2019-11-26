@@ -1,4 +1,4 @@
-package com.rz.qrary.fragments.books
+package com.rz.qrary.user.fragments.books
 
 import android.os.Bundle
 import android.util.Log
@@ -38,7 +38,6 @@ class BooksFragment : Fragment() {
         viewModel = activity?.run{
             ViewModelProviders.of(this)[BooksViewModel::class.java]
         } ?: throw Exception("Invalid Activity")
-
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -50,7 +49,10 @@ class BooksFragment : Fragment() {
 
         viewModel.getArticle().observe(this, Observer { articles ->
             if(articles != null){
-                rvAdapter = BooksRVAdapter(articles, activity!!.applicationContext)
+                rvAdapter = BooksRVAdapter(
+                    articles,
+                    activity!!.applicationContext
+                )
                 Log.d("BooksFragment", articles.toString())
                 rv.adapter = rvAdapter
                 rvAdapter.notifyDataSetChanged()

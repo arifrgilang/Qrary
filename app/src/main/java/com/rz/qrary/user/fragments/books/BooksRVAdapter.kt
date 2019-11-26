@@ -1,4 +1,4 @@
-package com.rz.qrary.fragments.books
+package com.rz.qrary.user.fragments.books
 
 import android.content.Context
 import android.content.Intent
@@ -8,13 +8,15 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.prof.rssparser.Article
 import com.rz.qrary.R
-import com.rz.qrary.fragments.BookDetailActivity
+import com.rz.qrary.user.fragments.BookDetailActivity
 import kotlinx.android.synthetic.main.books_viewholder.view.*
 
 class BooksRVAdapter(val articles: MutableList<Article>, val ctx: Context): RecyclerView.Adapter<BooksRVAdapter.ViewHolder>() {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
-        LayoutInflater.from(parent.context).inflate(R.layout.books_viewholder, parent, false))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
+        ViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.books_viewholder, parent, false)
+        )
 
     override fun getItemCount(): Int = articles.size
 

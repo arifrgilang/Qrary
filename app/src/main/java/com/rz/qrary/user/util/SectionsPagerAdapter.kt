@@ -1,13 +1,13 @@
-package com.rz.qrary.ui.main
+package com.rz.qrary.user.util
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.rz.qrary.R
-import com.rz.qrary.fragments.books.BooksFragment
-import com.rz.qrary.fragments.HistoryFragment
-import com.rz.qrary.fragments.ProfileFragment
+import com.rz.qrary.user.fragments.books.BooksFragment
+import com.rz.qrary.user.fragments.HistoryFragment
+import com.rz.qrary.user.fragments.ProfileFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
