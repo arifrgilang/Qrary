@@ -43,8 +43,13 @@ dependencies {
     // RSS Parser
     implementation 'com.prof.rssparser:rssparser:2.0.4'
 
+    // Firebase
+    implementation 'com.google.firebase:firebase-database:19.2.0'
+
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 }
+
+apply plugin: 'com.google.gms.google-services'

@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "439888869483",
+    "firebase_url": "https://qrary-argil.firebaseio.com",
+    "project_id": "qrary-argil",
+    "storage_bucket": "qrary-argil.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:439888869483:android:5fad448907e50edcfad92e",
+        "android_client_info": {
+          "package_name": "com.rz.qrary"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "439888869483-takhq50n45u1rl0123ojnb68eethr9t6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.rz.qrary",
+            "certificate_hash": "db5ffc028fb3a4c8fe7b826d123f6f8dc80e4eb4"
+          }
+        },
+        {
+          "client_id": "439888869483-krgbs8jcurmq208bg2a5um5u4famlqdo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAf8xcHBN3tb4TPVfvLNy4QpP5ClLefycg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "439888869483-krgbs8jcurmq208bg2a5um5u4famlqdo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
