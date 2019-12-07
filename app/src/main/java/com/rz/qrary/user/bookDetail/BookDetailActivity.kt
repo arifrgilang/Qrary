@@ -1,4 +1,4 @@
-package com.rz.qrary.user.fragments
+package com.rz.qrary.user.bookDetail
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

@@ -1,13 +1,13 @@
-package com.rz.qrary.user.util
+package com.rz.qrary.user.main
 
 import android.content.Context
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.rz.qrary.R
-import com.rz.qrary.user.fragments.books.BooksFragment
-import com.rz.qrary.user.fragments.HistoryFragment
-import com.rz.qrary.user.fragments.ProfileFragment
+import com.rz.qrary.user.main.sectionBooks.BooksFragment
+import com.rz.qrary.user.main.sectionHistory.HistoryFragment
+import com.rz.qrary.user.main.sectionProfile.ProfileFragment
 
 private val TAB_TITLES = arrayOf(
     R.string.tab_text_1,
@@ -19,7 +19,7 @@ private val TAB_TITLES = arrayOf(
  * A [FragmentPagerAdapter] that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-class SectionsPagerAdapter(private val context: Context, fm: FragmentManager) :
+class MainPagerAdapter(private val context: Context, fm: FragmentManager) :
     FragmentPagerAdapter(fm) {
 
     private val fragments = listOf(
