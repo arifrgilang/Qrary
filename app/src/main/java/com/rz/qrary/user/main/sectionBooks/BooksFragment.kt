@@ -9,17 +9,19 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+import com.firebase.ui.database.FirebaseRecyclerOptions
 
 import com.rz.qrary.R
+import com.rz.qrary.repository.Book
+import com.rz.qrary.repository.Repository
+import kotlinx.android.synthetic.main.fragment_books.*
 
 class BooksFragment : Fragment() {
     private lateinit var rvAdapter: BooksRVAdapter
-    private lateinit var viewModel: BooksViewModel
-    private lateinit var rv: RecyclerView
-    private lateinit var swipeLayout: SwipeRefreshLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,47 +29,22 @@ class BooksFragment : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_books, container, false)
         // Inflate the layout for this fragment
-        rv = view.findViewById(R.id.books_rv)
-        swipeLayout = view.findViewById(R.id.swipe_layout)
+//        rv = view.findViewById(R.id.books_rv)
         return view
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        viewModel = activity?.run{
-            ViewModelProviders.of(this)[BooksViewModel::class.java]
-        } ?: throw Exception("Invalid Activity")
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        rv.layoutManager = LinearLayoutManager(activity)
-        rv.itemAnimator = DefaultItemAnimator()
-        rv.setHasFixedSize(true)
+//        rv.layoutManager = LinearLayoutManager(activity)
+        books_rv.layoutManager = GridLayoutManager(activity, 2)
+        books_rv.itemAnimator = DefaultItemAnimator()
 
-        viewModel.getArticle().observe(this, Observer { articles ->
-            if(articles != null){
-                rvAdapter = BooksRVAdapter(
-                    articles,
-                    activity!!.applicationContext
-                )
-                Log.d("BooksFragment", articles.toString())
-                rv.adapter = rvAdapter
-                rvAdapter.notifyDataSetChanged()
-                swipeLayout.isRefreshing = false
-            }
-        })
-
-        swipeLayout.setColorSchemeResources(R.color.colorPrimary, R.color.colorPrimaryDark)
-        swipeLayout.canChildScrollUp()
-        swipeLayout.setOnRefreshListener {
-            rvAdapter.articles.clear()
-            rvAdapter.notifyDataSetChanged()
-            swipeLayout.isRefreshing = true
-            viewModel.fetchArticle()
-        }
-
-        viewModel.fetchArticle()
+        val option = FirebaseRecyclerOptions.Builder<Book>()
+            .setQuery(Repository.getBookDb(), Book::class.java)
+            .build()
+        rvAdapter = BooksRVAdapter(option)
+        books_rv.adapter = rvAdapter
+        rvAdapter.startListening()
     }
 }
