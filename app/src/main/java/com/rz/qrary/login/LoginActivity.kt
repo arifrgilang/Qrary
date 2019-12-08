@@ -5,7 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
 import com.rz.qrary.R
-import com.rz.qrary.maintainer.MaintainerActivity
+import com.rz.qrary.maintainer.admin.MaintainerActivity
 import com.rz.qrary.user.main.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 

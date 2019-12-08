@@ -1,7 +1,6 @@
-package com.rz.qrary.maintainer
+package com.rz.qrary.maintainer.admin
 
 import android.app.Activity
-import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -11,6 +10,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.rz.qrary.R
+import com.rz.qrary.login.LoginActivity
+import com.rz.qrary.maintainer.daftar.DaftarActivity
 import com.rz.qrary.repository.Mahasiswa
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.activity_maintainer.*
@@ -37,13 +38,23 @@ class MaintainerActivity : AppCompatActivity() {
         val option = FirebaseRecyclerOptions.Builder<Mahasiswa>()
             .setQuery(Repository.getPengunjung(), Mahasiswa::class.java)
             .build()
-        pengunjungAdapter = PengunjungRVAdapter(this, option)
+        pengunjungAdapter =
+            PengunjungRVAdapter(this, option)
         rv_pengunjung.adapter = pengunjungAdapter
 
         pengunjungAdapter.startListening()
 
         // Peminjam RecyclerView
 
+        // Logout
+        logout_admin_button.setOnClickListener {
+            startActivity(Intent(this , LoginActivity::class.java))
+            finish()
+        }
+
+        cek_npm_button.setOnClickListener {
+            startActivity(Intent(this, DaftarActivity::class.java))
+        }
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

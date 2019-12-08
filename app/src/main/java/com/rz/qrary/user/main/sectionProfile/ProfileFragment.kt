@@ -1,6 +1,5 @@
 package com.rz.qrary.user.main.sectionProfile
 
-import android.app.AlertDialog
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -10,9 +9,6 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
-import androidx.cardview.widget.CardView
-import androidx.core.view.marginBottom
 import com.bumptech.glide.Glide
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -40,7 +36,9 @@ class ProfileFragment : Fragment() {
         initProfile(npm)
         generateQR(npm)
         logout_button.setOnClickListener {
-            startActivity(Intent(activity!! ,LoginActivity::class.java))
+            val intent = Intent(activity!! ,LoginActivity::class.java)
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+            startActivity(intent)
             activity!!.finish()
         }
 

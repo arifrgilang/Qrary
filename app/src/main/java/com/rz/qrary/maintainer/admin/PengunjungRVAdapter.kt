@@ -1,4 +1,4 @@
-package com.rz.qrary.maintainer
+package com.rz.qrary.maintainer.admin
 
 import android.content.Context
 import android.util.Log
