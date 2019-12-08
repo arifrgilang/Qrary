@@ -35,4 +35,9 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
         startActivity(Intent(this, MaintainerActivity::class.java))
         finish()
     }
+
+    override fun showLoading(condition: Boolean) {
+        login_btn.text = if (condition) "Please Wait. . ." else "Login"
+        login_btn.isEnabled = !condition
+    }
 }

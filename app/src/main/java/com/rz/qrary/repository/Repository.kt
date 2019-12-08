@@ -37,34 +37,27 @@ class Repository {
             .child(npm)
 
         fun checkLogin(ctx: Context, mView: LoginContract.View, npm: String, pw: String){
-            Log.d("check login", npm.substring(0,3))
-            if(npm.substring(0,3) == "140") {
-                firebase().child("data_mhs").child(npm)
-                    .addValueEventListener(object : ValueEventListener {
-                        override fun onCancelled(p0: DatabaseError) {
-                            Log.d("Check Login", p0.message)
-                        }
+            firebase().child("data_mhs").child(npm)
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onCancelled(p0: DatabaseError) {
+                        Log.d("Check Login", p0.message)
+                    }
 
-                        override fun onDataChange(p0: DataSnapshot) {
-                            val mhs = p0.getValue(Mahasiswa::class.java)
-//                            Log.d("mhs", mhs.toString())
-//                            Log.d("mhspw", (mhs!!.pw == pw).toString())
-                            if(mhs == null){
-                                mView.showToast("NPM Tidak Terdaftar!")
+                    override fun onDataChange(p0: DataSnapshot) {
+                        val mhs = p0.getValue(Mahasiswa::class.java)
+                        if(mhs == null){
+                            mView.showToast("NPM Tidak Terdaftar!")
+                        } else {
+                            if (mhs.pw == pw) {
+                                writeStringToDB(localDb(ctx), NPM, npm)
+                                mView.navigateToUser()
                             } else {
-                                if (mhs.pw == pw) {
-                                    writeStringToDB(localDb(ctx), NPM, npm)
-                                    mView.navigateToUser()
-                                } else {
-                                    mView.showToast("ID atau PW salah!")
-                                }
+                                mView.showToast("ID atau PW salah!")
                             }
-
                         }
-                    })
-            } else {
-                mView.showToast("NPM Tidak Ada!")
-            }
+                        mView.showLoading(false)
+                    }
+                })
         }
 
 //        fun getMahasiswa(npm: String): Mahasiswa{
