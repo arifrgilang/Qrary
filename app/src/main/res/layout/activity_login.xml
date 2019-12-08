@@ -1,72 +1,76 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
+    android:gravity="center"
     android:background="@color/colorPrimaryDark"
     tools:context=".login.LoginActivity">
 
-    <ImageView
-        android:id="@+id/logo_splash"
-        android:layout_marginTop="48dp"
-        android:layout_width="250dp"
-        android:layout_height="250dp"
-        android:src="@drawable/logo_qrary"
-        android:layout_gravity="center_horizontal"/>
-
-    <TextView
-        android:layout_marginStart="64dp"
-        android:layout_marginEnd="64dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAlignment="center"
-        android:textColor="@color/colorAccent"
-        android:text="Aplikasi digitalisasi perpustakaan Grha Kandaga Universitas Padjadjaran"
-        android:layout_marginBottom="32dp"/>
+        android:orientation="vertical">
+        <ImageView
+            android:id="@+id/logo_splash"
+            android:layout_width="250dp"
+            android:layout_height="250dp"
+            android:src="@drawable/logo_qrary"
+            android:layout_gravity="center_horizontal"/>
 
-    <com.libizo.CustomEditText
-        android:id="@+id/username"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="8dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="text"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:hint="@string/id_paus"
-        app:libIZO_setBorderView="true"
-        app:libIZO_setStrokeWidth="2dp"
-        app:libIZO_setBorderColor="@color/colorAccent"
-        app:libIZO_setCornerRadius="8dp"/>
+        <TextView
+            android:layout_marginStart="64dp"
+            android:layout_marginEnd="64dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/colorAccent"
+            android:text="Aplikasi digitalisasi perpustakaan Grha Kandaga Universitas Padjadjaran"
+            android:layout_marginBottom="32dp"/>
 
-    <com.libizo.CustomEditText
-        android:id="@+id/password"
-        android:layout_marginStart="32dp"
-        android:layout_marginEnd="32dp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:textColor="@color/colorAccent"
-        android:textColorHint="@color/colorAccent"
-        android:hint="@string/password"
-        app:libIZO_setBorderView="true"
-        app:libIZO_setStrokeWidth="2dp"
-        app:libIZO_setBorderColor="@color/colorAccent"
-        app:libIZO_setCornerRadius="8dp"/>
+        <com.libizo.CustomEditText
+            android:id="@+id/username"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:hint="NPM"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setStrokeWidth="2dp"
+            app:libIZO_setBorderColor="@color/colorAccent"
+            app:libIZO_setCornerRadius="8dp"/>
 
-    <Button
-        android:layout_marginTop="16dp"
-        android:layout_marginStart="30dp"
-        android:layout_marginEnd="30dp"
-        android:id="@+id/login_btn"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:backgroundTint="@color/colorAccent"
-        android:textColor="@color/colorPrimaryDark"/>
+        <com.libizo.CustomEditText
+            android:id="@+id/password"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:textColor="@color/colorAccent"
+            android:textColorHint="@color/colorAccent"
+            android:hint="@string/password"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setStrokeWidth="2dp"
+            app:libIZO_setBorderColor="@color/colorAccent"
+            app:libIZO_setCornerRadius="8dp"/>
 
-</LinearLayout>
+        <Button
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:id="@+id/login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:backgroundTint="@color/colorAccent"
+            android:textColor="@color/colorPrimaryDark"/>
+    </LinearLayout>
+
+</RelativeLayout>

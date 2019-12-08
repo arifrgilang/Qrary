@@ -37,6 +37,29 @@ class ProfileFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         val npm = Repository.localDb(activity!!).getString(Repository.NPM, "")
+        initProfile(npm)
+        generateQR(npm)
+        logout_button.setOnClickListener {
+            startActivity(Intent(activity!! ,LoginActivity::class.java))
+            activity!!.finish()
+        }
+
+        getDipinjamCount(npm)
+        getTerpinjamCount(npm)
+    }
+
+    private fun generateQR(npm: String?) {
+        val qrCode: Bitmap = QrGenerator.Builder()
+            .content(npm)
+            .qrSize(800)
+            .color(Color.BLACK)
+            .ecc(ErrorCorrectionLevel.H)
+            .encode()
+
+        qr_code.setImageBitmap(qrCode)
+    }
+
+    private fun initProfile(npm: String?) {
         Repository.firebase().child("data_mhs").child(npm!!)
             .addValueEventListener(object: ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
@@ -53,38 +76,22 @@ class ProfileFragment : Fragment() {
                     npm_mhs.text = mhs.npm
                 }
             })
+    }
 
-
-//        val alertDialog = AlertDialog.Builder(activity)
-        val factory = LayoutInflater.from(activity!!.applicationContext)
-//        val qrView = factory.inflate(R.layout.qr_zoomed, null)
-
-        // QR Code Generator
-        val qrCode: Bitmap = QrGenerator.Builder()
-            .content(Repository.localDb(activity!!).getString(Repository.NPM,""))
-            .qrSize(800)
-            .color(Color.BLACK)
-            .ecc(ErrorCorrectionLevel.H)
-            .encode()
-
-        qr_code.setImageBitmap(qrCode)
-        // Alert Dialog QR
-//        card_qr.setOnClickListener{
-//            if(qrView.parent != null){
-//                val a = qrView.parent as ViewGroup
-//                a.removeView(qrView)
-//            }
-//            val img = qrView.findViewById<ImageView>(R.id.qr_zoomed)
-//            img.setImageBitmap(qrCode)
-//            alertDialog
-//                .setTitle("*digunakan saat akan meminjam buku")
-//                .setView(qrView)
-//                .create().show()
-//        }
-
-        logout_button.setOnClickListener {
-            startActivity(Intent(activity!! ,LoginActivity::class.java))
-            activity!!.finish()
-        }
+    private fun getDipinjamCount(npm: String?) {
+        Repository.getDipinjamDb(npm!!).addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                profile_dipinjam.text = "" + p0.childrenCount + " Buku"
+            }
+        })
+    }
+    private fun getTerpinjamCount(npm: String?) {
+        Repository.getTerpinjamDb(npm!!).addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                profile_terpinjam.text = "" + p0.childrenCount + " Buku"
+            }
+        })
     }
 }

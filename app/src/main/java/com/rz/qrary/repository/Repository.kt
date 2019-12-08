@@ -47,14 +47,19 @@ class Repository {
 
                         override fun onDataChange(p0: DataSnapshot) {
                             val mhs = p0.getValue(Mahasiswa::class.java)
-                            Log.d("mhs", mhs.toString())
-                            Log.d("mhspw", (mhs!!.pw == pw).toString())
-                            if (mhs.pw == pw) {
-                                writeStringToDB(localDb(ctx), NPM, npm)
-                                mView.navigateToUser()
+//                            Log.d("mhs", mhs.toString())
+//                            Log.d("mhspw", (mhs!!.pw == pw).toString())
+                            if(mhs == null){
+                                mView.showToast("NPM Tidak Terdaftar!")
                             } else {
-                                mView.showToast("ID atau PW salah!")
+                                if (mhs.pw == pw) {
+                                    writeStringToDB(localDb(ctx), NPM, npm)
+                                    mView.navigateToUser()
+                                } else {
+                                    mView.showToast("ID atau PW salah!")
+                                }
                             }
+
                         }
                     })
             } else {

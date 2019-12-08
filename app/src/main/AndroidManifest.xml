@@ -24,7 +24,8 @@
 
         <activity
             android:name=".login.LoginActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".SplashActivity"

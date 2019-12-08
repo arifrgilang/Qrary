@@ -26,7 +26,7 @@ class DipinjamRVAdapter (val npm: String,  option: FirebaseRecyclerOptions<Book>
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int, book: Book) {
         val issn = getRef(position).key.toString()
-        Log.d("OnBindViewHolder", issn)
+//        Log.d("OnBindViewHolder", issn)
         Repository.getDipinjamDb(npm).child(issn)
             .addValueEventListener(object: ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) { Log.d("OnCancelled", p0.message) }

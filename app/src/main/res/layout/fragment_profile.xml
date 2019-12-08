@@ -35,13 +35,11 @@
                     <TextView
                         android:id="@+id/nama_mhs"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Arif Rhizky Gilang Purnama"/>
+                        android:layout_height="wrap_content" />
                     <TextView
                         android:id="@+id/npm_mhs"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="140810170030"/>
+                        android:layout_height="wrap_content" />
 
                 </LinearLayout>
 
@@ -95,9 +93,9 @@
                     android:layout_height="wrap_content"
                     android:text="Buku yang sedang dipinjam" />
                 <TextView
+                    android:id="@+id/profile_dipinjam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="2 Buku"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
             </LinearLayout>
@@ -121,9 +119,9 @@
                     android:layout_height="wrap_content"
                     android:text="Buku yang telah dipinjam" />
                 <TextView
+                    android:id="@+id/profile_terpinjam"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="16 Buku"
                     android:textSize="24sp"
                     android:textStyle="bold"/>
             </LinearLayout>
