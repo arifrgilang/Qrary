@@ -49,14 +49,20 @@ class MaintainerActivity : AppCompatActivity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == QrScannerActivity.QR_REQUEST_CODE){
-            val npm = data!!.extras!!.getString(QrScannerActivity.QR_RESULT_STR)!!
-            Log.d("data" , npm.substring(5))
-            Log.d("data" , npm.substring(0,5))
-            if(npm.substring(0,5) == "qrary"){
-                Repository.addPengunjung(npm.substring(5))
+            if(resultCode == Activity.RESULT_OK){
+                val npm = data!!.extras!!.getString(QrScannerActivity.QR_RESULT_STR)!!
+                Log.d("data" , npm.substring(5))
+                Log.d("data" , npm.substring(0,5))
+                if(npm.substring(0,5) == "qrary"){
+                    Repository.addPengunjung(npm.substring(5))
+                    Toast.makeText(this, "Pengunjung ditambahkan", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "QR Code tidak terdaftar!", Toast.LENGTH_SHORT).show()
+                }
             } else {
-                Toast.makeText(this, "QR Code tidak terdaftar!", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Scan dibatalkan", Toast.LENGTH_SHORT).show()
             }
+        } else {
 
         }
     }
