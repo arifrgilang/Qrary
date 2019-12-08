@@ -1,4 +1,4 @@
-package com.rz.qrary.user.main.sectionBooks
+package com.rz.qrary.user.main.sectionHistory
 
 import android.util.Log
 import android.view.LayoutInflater
@@ -15,8 +15,8 @@ import com.rz.qrary.repository.Book
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.books_viewholder.view.*
 
-class BooksRVAdapter(option: FirebaseRecyclerOptions<Book>)
-    : FirebaseRecyclerAdapter<Book, BooksRVAdapter.ViewHolder>(option) {
+class DipinjamRVAdapter (val npm: String,  option: FirebaseRecyclerOptions<Book>)
+    : FirebaseRecyclerAdapter<Book, DipinjamRVAdapter.ViewHolder>(option) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
         ViewHolder(
@@ -27,11 +27,11 @@ class BooksRVAdapter(option: FirebaseRecyclerOptions<Book>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int, book: Book) {
         val issn = getRef(position).key.toString()
         Log.d("OnBindViewHolder", issn)
-        Repository.getBookDb().child(issn)
-            .addValueEventListener(object: ValueEventListener{
+        Repository.getDipinjamDb(npm).child(issn)
+            .addValueEventListener(object: ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) { Log.d("OnCancelled", p0.message) }
                 override fun onDataChange(p0: DataSnapshot) { holder.bind(book) }
-        })
+            })
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

@@ -1,107 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".user.main.sectionBooks.BooksFragment">
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/books_rv"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-        <HorizontalScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scrollbars="none">
-            <com.google.android.material.chip.ChipGroup
-                android:layout_margin="16dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+        android:layout_height="match_parent"/>
 
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2019"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2019"
-                    android:layout_marginEnd="8dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2018"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2018"
-                    android:layout_marginEnd="8dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2017"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2017"
-                    android:layout_marginEnd="8dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_2016"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="2016"
-                    android:layout_marginEnd="8dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_bachelor"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Bachelor Thesis"
-                    android:layout_marginEnd="8dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_doctoral"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Doctoral Thesis"
-                    android:layout_marginEnd="8dp"/>
-
-                <com.google.android.material.chip.Chip
-                    android:id="@+id/chip_master"
-                    style="@style/Widget.MaterialComponents.Chip.Action"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Master Thesis"
-                    android:layout_marginEnd="8dp"/>
-
-            </com.google.android.material.chip.ChipGroup>
-        </HorizontalScrollView>
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/title_category"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Title"
-                    android:textStyle="bold"
-                    android:textAlignment="center"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginBottom="8dp"/>
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/books_rv"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"/>
-            </LinearLayout>
-
-        </RelativeLayout>
-    </LinearLayout>
-
-</FrameLayout>
+</RelativeLayout>

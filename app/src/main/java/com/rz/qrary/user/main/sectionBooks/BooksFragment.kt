@@ -26,17 +26,10 @@ class BooksFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        val view = inflater.inflate(R.layout.fragment_books, container, false)
-        // Inflate the layout for this fragment
-//        rv = view.findViewById(R.id.books_rv)
-        return view
-    }
+    ): View? = inflater.inflate(R.layout.fragment_books, container, false)
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-
-//        rv.layoutManager = LinearLayoutManager(activity)
         books_rv.layoutManager = GridLayoutManager(activity, 2)
         books_rv.itemAnimator = DefaultItemAnimator()
 

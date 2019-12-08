@@ -16,7 +16,7 @@ class LoginActivity : AppCompatActivity(), LoginContract.View {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-        mPresenter = LoginPresenter(this)
+        mPresenter = LoginPresenter(this, this)
 
         login_btn.setOnClickListener {
             mPresenter.checkLogin(username.text.toString(), password.text.toString())

@@ -5,5 +5,6 @@ data class Book (
     var jmlHal: String = "",
     var judul: String = "",
     var penerbit: String = "",
-    var penulis: String = ""
+    var penulis: String = "",
+    var issn: String = ""
 )
