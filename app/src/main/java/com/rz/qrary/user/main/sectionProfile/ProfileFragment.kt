@@ -49,8 +49,9 @@ class ProfileFragment : Fragment() {
     }
 
     private fun generateQR(npm: String?) {
+        val contentString = "qrary"+npm
         val qrCode: Bitmap = QrGenerator.Builder()
-            .content(npm)
+            .content(contentString)
             .qrSize(800)
             .color(Color.BLACK)
             .ecc(ErrorCorrectionLevel.H)

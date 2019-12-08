@@ -60,18 +60,20 @@ class Repository {
                 })
         }
 
-//        fun getMahasiswa(npm: String): Mahasiswa{
-//            var result = Mahasiswa()
-//            firebase().child("data_mhs").child(npm)
-//                .addValueEventListener(object: ValueEventListener{
-//                    override fun onCancelled(p0: DatabaseError) {
-//                        Log.d("Get Mahasiswa", p0.message)
-//                    }
-//
-//                    override fun onDataChange(p0: DataSnapshot) {
-//                        result = p0.getValue(Mahasiswa::class.java)!!
-//                    }
-//                })
-//        }
+        fun getPengunjung() = firebase()
+            .child("pengunjung")
+
+        fun addPengunjung(npm: String){
+            firebase().child("data_mhs").child(npm)
+                .addValueEventListener(object: ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        val mhs = p0.getValue(Mahasiswa::class.java)
+                        getPengunjung()
+                            .child(Util.getLocalDate()+"X"+Util.getLocalTime())
+                            .setValue(mhs)
+                    }
+            })
+        }
     }
 }
