@@ -13,7 +13,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.rz.qrary.R
-import com.rz.qrary.repository.Mahasiswa
+import com.rz.qrary.repository.model.Mahasiswa
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.mhs_viewholder.view.*
 
@@ -36,7 +36,7 @@ class PengunjungRVAdapter (val ctx: Context, option: FirebaseRecyclerOptions<Mah
         Log.d("TanggalParsed", tanggalParsed)
 
         Repository.getPengunjung().child(tanggal)
-            .addValueEventListener(object: ValueEventListener {
+            .addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) { Log.d("OnCancelled", p0.message) }
                 override fun onDataChange(p0: DataSnapshot) { holder.bind(ctx, mhs, tanggalParsed) }
             })

@@ -1,19 +1,11 @@
 package com.rz.qrary.maintainer.daftar
 
-import android.content.Context
-import android.content.Intent
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
-import com.rz.qrary.maintainer.admin.MaintainerActivity
-import com.rz.qrary.repository.Mahasiswa
+import com.rz.qrary.repository.model.Mahasiswa
 import com.rz.qrary.repository.Repository
-import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
-import java.io.InputStream
 import java.net.HttpURLConnection
 import java.net.URL
 
@@ -33,7 +25,8 @@ class DaftarPresenter(var ctx: DaftarActivity, var mView: DaftarContract.View): 
         val angkatan = "20"+npm.substring(6,8)
         val urlFoto = "https://media.unpad.ac.id/photo/mahasiswa/" +
                 fakultas + "/" + angkatan+ "/" + npm +".JPG"
-        val mhs = Mahasiswa(nama,npm,pw,urlFoto,"0")
+        val mhs =
+            Mahasiswa(nama, npm, pw, urlFoto, "0")
         Repository.firebase()
             .child("data_mhs")
             .child(npm)
@@ -43,16 +36,15 @@ class DaftarPresenter(var ctx: DaftarActivity, var mView: DaftarContract.View): 
     }
 
     private fun checkUrl(npm: String) {
-
         var mhs: Mahasiswa?
         Repository.firebase().child("data_mhs").child(npm)
-            .addValueEventListener(object: ValueEventListener{
+            .addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {}
-
                 override fun onDataChange(p0: DataSnapshot) {
                     mhs = p0.getValue(Mahasiswa::class.java)
                     if (mhs != null){
                         mView.showToast("NPM sudah terdaftar")
+                        mView.showLoading(false)
                     } else {
                         urlCheck(npm)
                     }

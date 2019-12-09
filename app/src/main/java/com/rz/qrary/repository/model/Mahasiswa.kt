@@ -1,4 +1,4 @@
-package com.rz.qrary.repository
+package com.rz.qrary.repository.model
 
 data class Mahasiswa(
     var nama: String = "",

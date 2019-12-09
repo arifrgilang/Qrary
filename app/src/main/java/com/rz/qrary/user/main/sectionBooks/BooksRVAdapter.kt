@@ -11,7 +11,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.rz.qrary.R
-import com.rz.qrary.repository.Book
+import com.rz.qrary.repository.model.Book
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.books_viewholder.view.*
 

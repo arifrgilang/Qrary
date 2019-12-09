@@ -5,6 +5,8 @@ import android.content.SharedPreferences
 import android.util.Log
 import com.google.firebase.database.*
 import com.rz.qrary.login.LoginContract
+import com.rz.qrary.repository.model.Mahasiswa
+import com.rz.qrary.util.Util
 
 class Repository {
     companion object{
@@ -65,15 +67,32 @@ class Repository {
 
         fun addPengunjung(npm: String){
             firebase().child("data_mhs").child(npm)
-                .addValueEventListener(object: ValueEventListener{
+                .addListenerForSingleValueEvent(object: ValueEventListener{
                     override fun onCancelled(p0: DatabaseError) {}
                     override fun onDataChange(p0: DataSnapshot) {
                         val mhs = p0.getValue(Mahasiswa::class.java)
                         getPengunjung()
-                            .child(Util.getLocalDate()+"X"+Util.getLocalTime())
+                            .child(Util.getLocalDate()+"X"+ Util.getLocalTime())
                             .setValue(mhs)
                     }
             })
+        }
+
+        fun setPinjamMode(npm: String, value: String){
+            firebase()
+                .child("data_mhs")
+                .child(npm)
+                .addListenerForSingleValueEvent(object: ValueEventListener{
+                    override fun onCancelled(p0: DatabaseError) {}
+                    override fun onDataChange(p0: DataSnapshot) {
+                        val mhs = p0.getValue(Mahasiswa::class.java)
+                        mhs!!.mode_pinjam = value
+                        firebase()
+                            .child("data_mhs")
+                            .child(mhs.npm)
+                            .setValue(mhs)
+                    }
+                })
         }
     }
 }

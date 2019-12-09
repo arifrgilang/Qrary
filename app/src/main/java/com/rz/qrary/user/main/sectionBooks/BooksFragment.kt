@@ -1,22 +1,16 @@
 package com.rz.qrary.user.main.sectionBooks
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
 import com.rz.qrary.R
-import com.rz.qrary.repository.Book
+import com.rz.qrary.repository.model.Book
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.fragment_books.*
 

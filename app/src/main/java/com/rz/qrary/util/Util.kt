@@ -1,4 +1,4 @@
-package com.rz.qrary.repository
+package com.rz.qrary.util
 
 import java.text.SimpleDateFormat
 import java.util.*

@@ -12,7 +12,8 @@ import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.rz.qrary.R
 import com.rz.qrary.login.LoginActivity
 import com.rz.qrary.maintainer.daftar.DaftarActivity
-import com.rz.qrary.repository.Mahasiswa
+import com.rz.qrary.maintainer.konfirmasi.KonfirmasiActivity
+import com.rz.qrary.repository.model.Mahasiswa
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.activity_maintainer.*
 import me.ydcool.lib.qrmodule.activity.QrScannerActivity
@@ -24,15 +25,20 @@ class MaintainerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maintainer)
+        // Button Pengunjung
         button_pengunjung.setOnClickListener{
             val intent = Intent(this, QrScannerActivity::class.java)
             startActivityForResult(intent, QrScannerActivity.QR_REQUEST_CODE)
         }
+        // Button Konfirmasi Pinjam
+        button_pinjam.setOnClickListener{
+            startActivity(Intent(this, KonfirmasiActivity::class.java))
+        }
+
         // Pengunjung RecyclerView
         val layoutManager = LinearLayoutManager(this)
         layoutManager.reverseLayout = true
         layoutManager.stackFromEnd = true
-
         rv_pengunjung.layoutManager = layoutManager
         rv_pengunjung.itemAnimator = DefaultItemAnimator()
         val option = FirebaseRecyclerOptions.Builder<Mahasiswa>()
@@ -41,17 +47,16 @@ class MaintainerActivity : AppCompatActivity() {
         pengunjungAdapter =
             PengunjungRVAdapter(this, option)
         rv_pengunjung.adapter = pengunjungAdapter
-
         pengunjungAdapter.startListening()
 
         // Peminjam RecyclerView
 
-        // Logout
+        // Button Logout
         logout_admin_button.setOnClickListener {
             startActivity(Intent(this , LoginActivity::class.java))
             finish()
         }
-
+        // Button Daftar
         cek_npm_button.setOnClickListener {
             startActivity(Intent(this, DaftarActivity::class.java))
         }

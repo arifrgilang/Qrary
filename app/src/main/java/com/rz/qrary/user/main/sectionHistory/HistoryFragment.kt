@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
 import com.rz.qrary.R
-import com.rz.qrary.repository.Book
+import com.rz.qrary.repository.model.Book
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.fragment_history.*
 

@@ -1,4 +1,4 @@
-package com.rz.qrary.repository
+package com.rz.qrary.repository.model
 
 data class Book (
     var bahasa: String = "",

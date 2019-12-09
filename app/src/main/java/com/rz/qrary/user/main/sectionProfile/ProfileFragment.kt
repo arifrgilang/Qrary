@@ -17,7 +17,7 @@ import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel
 
 import com.rz.qrary.R
 import com.rz.qrary.login.LoginActivity
-import com.rz.qrary.repository.Mahasiswa
+import com.rz.qrary.repository.model.Mahasiswa
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.fragment_profile.*
 import me.ydcool.lib.qrmodule.encoding.QrGenerator
@@ -60,7 +60,7 @@ class ProfileFragment : Fragment() {
 
     private fun initProfile(npm: String?) {
         Repository.firebase().child("data_mhs").child(npm!!)
-            .addValueEventListener(object: ValueEventListener {
+            .addListenerForSingleValueEvent(object: ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {
                     Log.d("Get Mahasiswa", p0.message)
                 }
