@@ -1,4 +1,4 @@
-package com.rz.qrary.user.main
+package com.rz.qrary.user.main.container
 
 import android.content.Context
 import androidx.fragment.app.Fragment

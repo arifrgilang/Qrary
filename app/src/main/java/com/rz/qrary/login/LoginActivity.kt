@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.widget.Toast
 import com.rz.qrary.R
 import com.rz.qrary.maintainer.admin.MaintainerActivity
-import com.rz.qrary.user.main.MainActivity
+import com.rz.qrary.user.main.container.MainActivity
 import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : AppCompatActivity(), LoginContract.View {

@@ -39,60 +39,64 @@ class Repository {
             .child(npm)
 
         fun checkLogin(ctx: Context, mView: LoginContract.View, npm: String, pw: String){
-            firebase().child("data_mhs").child(npm)
-                .addValueEventListener(object : ValueEventListener {
-                    override fun onCancelled(p0: DatabaseError) {
-                        Log.d("Check Login", p0.message)
-                    }
+            val ref = firebase().child("data_mhs").child(npm)
+            ref.addValueEventListener(object : ValueEventListener {
+                override fun onCancelled(p0: DatabaseError) {
+                    Log.d("Check Login", p0.message)
+                }
 
-                    override fun onDataChange(p0: DataSnapshot) {
-                        val mhs = p0.getValue(Mahasiswa::class.java)
-                        if(mhs == null){
-                            mView.showToast("NPM Tidak Terdaftar!")
+                override fun onDataChange(p0: DataSnapshot) {
+                    val mhs = p0.getValue(Mahasiswa::class.java)
+                    if(mhs == null){
+                        mView.showToast("NPM Tidak Terdaftar!")
+                        ref.removeEventListener(this)
+                    } else {
+                        if (mhs.pw == pw) {
+                            writeStringToDB(localDb(ctx), NPM, npm)
+                            mView.navigateToUser()
+                            ref.removeEventListener(this)
                         } else {
-                            if (mhs.pw == pw) {
-                                writeStringToDB(localDb(ctx), NPM, npm)
-                                mView.navigateToUser()
-                            } else {
-                                mView.showToast("ID atau PW salah!")
-                            }
+                            mView.showToast("ID atau PW salah!")
+                            ref.removeEventListener(this)
                         }
-                        mView.showLoading(false)
                     }
-                })
+                    mView.showLoading(false)
+                }
+            })
         }
 
         fun getPengunjung() = firebase()
             .child("pengunjung")
 
         fun addPengunjung(npm: String){
-            firebase().child("data_mhs").child(npm)
-                .addListenerForSingleValueEvent(object: ValueEventListener{
-                    override fun onCancelled(p0: DatabaseError) {}
-                    override fun onDataChange(p0: DataSnapshot) {
-                        val mhs = p0.getValue(Mahasiswa::class.java)
-                        getPengunjung()
-                            .child(Util.getLocalDate()+"X"+ Util.getLocalTime())
-                            .setValue(mhs)
-                    }
+            val ref = firebase().child("data_mhs").child(npm)
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    val mhs = p0.getValue(Mahasiswa::class.java)
+                    getPengunjung()
+                        .child(Util.getLocalDate()+"X"+ Util.getLocalTime())
+                        .setValue(mhs)
+                    ref.removeEventListener(this)
+                }
             })
+
         }
 
         fun setPinjamMode(npm: String, value: String){
-            firebase()
-                .child("data_mhs")
-                .child(npm)
-                .addListenerForSingleValueEvent(object: ValueEventListener{
-                    override fun onCancelled(p0: DatabaseError) {}
-                    override fun onDataChange(p0: DataSnapshot) {
-                        val mhs = p0.getValue(Mahasiswa::class.java)
-                        mhs!!.mode_pinjam = value
-                        firebase()
-                            .child("data_mhs")
-                            .child(mhs.npm)
-                            .setValue(mhs)
-                    }
-                })
+            val ref = firebase().child("data_mhs").child(npm)
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    val mhs = p0.getValue(Mahasiswa::class.java)
+                    mhs!!.mode_pinjam = value
+                    val ref2 = firebase()
+                        .child("data_mhs")
+                        .child(mhs.npm)
+                        .setValue(mhs)
+                    ref.removeEventListener(this)
+                }
+            })
         }
     }
 }

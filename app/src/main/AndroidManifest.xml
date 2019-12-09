@@ -17,17 +17,14 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
+        <activity android:name=".user.main.preview.PreviewActivity"></activity>
         <activity
             android:name=".maintainer.konfirmasi.KonfirmasiActivity"
-            android:theme="@style/AppTheme.NoActionBar">
-
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar"></activity>
         <activity
             android:name=".maintainer.daftar.DaftarActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize">
-
-        </activity>
+            android:windowSoftInputMode="adjustResize"></activity>
         <activity
             android:name=".maintainer.admin.MaintainerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -47,7 +44,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".user.main.MainActivity"
+            android:name=".user.main.container.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
     </application>

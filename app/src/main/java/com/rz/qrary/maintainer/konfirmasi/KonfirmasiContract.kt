@@ -10,5 +10,7 @@ interface KonfirmasiContract {
     interface Presenter{
         fun getUserData(npm: String)
         fun setListener(npm: String)
+        fun setModePinjamValue(npm: String, value: String)
+        fun killListener()
     }
 }

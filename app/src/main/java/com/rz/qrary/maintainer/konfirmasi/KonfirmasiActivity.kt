@@ -16,6 +16,7 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
 
     private var peminjam: Mahasiswa? = null
     lateinit private var mPresenter: KonfirmasiContract.Presenter
+    lateinit private var npmMhs: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,19 +37,29 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
                 Log.d("data" , npm.substring(0,5))
                 if(npm.substring(0,5) == "qrary"){
                     // Get user data and set mode_pinjam
-                    mPresenter.getUserData(npm.substring(5))
-                    Toast.makeText(this, "Pengunjung ditambahkan", Toast.LENGTH_SHORT).show()
+                    npmMhs = npm.substring(5)
+                    mPresenter.getUserData(npmMhs)
+                    Toast.makeText(this, "Peminjam ditambahkan", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "QR Code tidak terdaftar!", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(this, "Scan dibatalkan", Toast.LENGTH_SHORT).show()
+                npmMhs = ""
+                finish()
             }
 
         }
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.setModePinjamValue(npmMhs, "0")
+        mPresenter.killListener()
+    }
+
     override fun setUserData(mhs: Mahasiswa) {
+        peminjam = mhs
         Glide.with(this)
             .load(mhs.url_foto)
             .centerCrop()
@@ -56,6 +67,7 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
 
         nama_peminjam.text = mhs.nama
         npm_peminjam.text = mhs.npm
+        mPresenter.setListener(npmMhs)
     }
 
     override fun finishActivity() = finish()
