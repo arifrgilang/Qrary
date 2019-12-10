@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.rz.qrary.R
 import com.rz.qrary.login.LoginActivity
+import com.rz.qrary.maintainer.addbuku.TambahBukuActivity
 import com.rz.qrary.maintainer.daftar.DaftarActivity
 import com.rz.qrary.maintainer.konfirmasi.KonfirmasiActivity
 import com.rz.qrary.repository.model.Mahasiswa
@@ -71,6 +72,10 @@ class MaintainerActivity : AppCompatActivity() {
         // Button Daftar
         cek_npm_button.setOnClickListener {
             startActivity(Intent(this, DaftarActivity::class.java))
+        }
+        // Button addbuku
+        add_buku.setOnClickListener {
+            startActivity(Intent(this, TambahBukuActivity::class.java))
         }
     }
 

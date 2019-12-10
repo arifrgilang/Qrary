@@ -78,27 +78,36 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:orientation="horizontal">
             <Button
-                android:id="@+id/cek_npm_button"
+                android:id="@+id/add_buku"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="8dp"
-                android:text="Daftar User"/>
+                android:backgroundTint="@color/colorPrimaryDark"
+                android:text="Tambah buku"/>
             <Button
-                android:backgroundTint="@android:color/holo_red_dark"
-                android:layout_marginStart="8dp"
-                android:id="@+id/logout_admin_button"
+                android:id="@+id/cek_npm_button"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
                 android:layout_marginEnd="16dp"
-                android:text="Logout"/>
+                android:backgroundTint="@color/colorAccent"
+                android:text="Daftar User"/>
         </LinearLayout>
 
+        <Button
+            android:backgroundTint="@android:color/holo_red_dark"
+            android:layout_marginStart="16dp"
+            android:id="@+id/logout_admin_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="8dp"
+            android:text="Logout"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"

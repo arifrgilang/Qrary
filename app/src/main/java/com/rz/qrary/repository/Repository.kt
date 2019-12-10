@@ -161,6 +161,7 @@ class Repository {
                     if(p0.hasChild(npm)){
                         Toast.makeText(ctx, "User masih meminjam buku!", Toast.LENGTH_SHORT).show()
                         ctx.finish()
+                        ref.removeEventListener(this)
                     }
                 }
             })
@@ -198,10 +199,30 @@ class Repository {
                     ) { p0, p1 ->
                         if (p0 == null){
                             refAsal.setValue(null)
+                            refAsal.removeEventListener(this)
                         } else {
                             Log.d("confirmPinjam", "Failed")
                             ctx.finish()
+                            refAsal.removeEventListener(this)
                         }
+                    }
+                }
+            })
+        }
+
+        fun cekIssn(ctx: Activity, issn: String){
+            val ref = firebase().child("db_buku")
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    val count = p0.hasChild(issn)
+                    if(count){
+                        Toast.makeText(ctx, "Buku sudah ada!", Toast.LENGTH_SHORT).show()
+                        ctx.finish()
+                        ref.removeEventListener(this)
+                    } else {
+                        Toast.makeText(ctx, "Isi data Buku", Toast.LENGTH_SHORT).show()
+                        ref.removeEventListener(this)
                     }
                 }
             })

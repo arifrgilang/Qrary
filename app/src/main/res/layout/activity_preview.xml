@@ -8,6 +8,19 @@
     android:orientation="vertical"
     tools:context=".user.main.preview.PreviewActivity">
 
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="120dp"
+            android:src="@drawable/logo_qrary"
+            android:layout_gravity="center_vertical|center_horizontal"
+            />
+    </com.google.android.material.appbar.AppBarLayout>
+
     <TextView
         android:text="Buku yang akan Dipinjam"
         android:layout_margin="16dp"

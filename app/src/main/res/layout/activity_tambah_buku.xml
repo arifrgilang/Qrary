@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".maintainer.addbuku.TambahBukuActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/AppTheme.AppBarOverlay">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="120dp"
+                android:src="@drawable/logo_qrary"
+                android:layout_gravity="center_vertical|center_horizontal"
+                />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="20sp"
+            android:textColor="@color/colorPrimaryDark"
+            android:text="Tambah Buku"
+            android:layout_margin="16dp"/>
+
+        <com.libizo.CustomEditText
+            android:id="@+id/addbuku_judul"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="Judul Buku"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setStrokeWidth="2dp"
+            app:libIZO_setBorderColor="@color/colorPrimaryDark"
+            app:libIZO_setCornerRadius="8dp"/>
+
+        <com.libizo.CustomEditText
+            android:id="@+id/addbuku_jumlah_halaman"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="Jumlah Halaman"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setStrokeWidth="2dp"
+            app:libIZO_setBorderColor="@color/colorPrimaryDark"
+            app:libIZO_setCornerRadius="8dp"/>
+
+        <com.libizo.CustomEditText
+            android:id="@+id/addbuku_bahasa"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="Bahasa"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setStrokeWidth="2dp"
+            app:libIZO_setBorderColor="@color/colorPrimaryDark"
+            app:libIZO_setCornerRadius="8dp"/>
+
+        <com.libizo.CustomEditText
+            android:id="@+id/addbuku_penulis"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="Penulis"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setStrokeWidth="2dp"
+            app:libIZO_setBorderColor="@color/colorPrimaryDark"
+            app:libIZO_setCornerRadius="8dp"/>
+
+        <com.libizo.CustomEditText
+            android:id="@+id/addbuku_penerbit"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:textColor="@color/colorPrimaryDark"
+            android:textColorHint="@color/colorPrimaryDark"
+            android:hint="Penerbit"
+            app:libIZO_setBorderView="true"
+            app:libIZO_setStrokeWidth="2dp"
+            app:libIZO_setBorderColor="@color/colorPrimaryDark"
+            app:libIZO_setCornerRadius="8dp"/>
+
+        <Button
+            android:id="@+id/addbuku_button"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="30dp"
+            android:layout_marginEnd="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tambahkan Buku"
+            android:backgroundTint="@color/colorPrimaryDark"
+            android:textColor="@android:color/white"/>
+    </LinearLayout>
+
+</ScrollView>
