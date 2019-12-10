@@ -44,7 +44,11 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
 
         selesai_konfirmasi.setOnClickListener {
             if(count>0){
+                val bundle = Bundle()
+                    bundle.putString("npm",npmMhs)
+
                 val dialog = ConfirmFragment()
+                dialog.arguments = bundle
                 dialog.show(supportFragmentManager, ConfirmFragment().tag)
             } else {
                 Toast.makeText(this, "Belum ada buku yang ditambahkan!", Toast.LENGTH_SHORT).show()
@@ -78,6 +82,8 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
                     // Get user data and set mode_pinjam
                     npmMhs = npm.substring(5)
                     mPresenter.getUserData(npmMhs)
+                    // make exception here
+                    Repository.checkIfStillMinjam(this, npmMhs)
                     initRV()
                     Toast.makeText(this, "Peminjam ditambahkan", Toast.LENGTH_SHORT).show()
                 } else {

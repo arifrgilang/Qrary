@@ -1,5 +1,6 @@
 package com.rz.qrary.repository
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
@@ -150,6 +151,40 @@ class Repository {
         fun removeTempList(npm: String){
             val ref = firebase().child("list_konfirm").child(npm)
             ref.removeValue()
+        }
+
+        fun confirmPeminjaman(ctx: Activity, npm: String){
+            val refAsal = firebase().child("list_konfirm").child(npm)
+            val refTujuan = firebase().child("pinjam_history").child(npm)
+            refAsal.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    refTujuan.setValue(p0.value
+                    ) { p0, p1 ->
+                        if(p0 != null){
+                            Log.d("confirmPinjam", "Failed")
+                            ctx.finish()
+                        } else {
+                            Log.d("confirmPinjam", "Success")
+                            ctx.finish()
+                        }
+                    }
+                    refAsal.removeEventListener(this)
+                }
+            })
+        }
+
+        fun checkIfStillMinjam(ctx: Activity, npm: String){
+            val ref = firebase().child("pinjam_history")
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    if(p0.hasChild(npm)){
+                        Toast.makeText(ctx, "User masih meminjam buku!", Toast.LENGTH_SHORT).show()
+                        ctx.finish()
+                    }
+                }
+            })
         }
     }
 }
