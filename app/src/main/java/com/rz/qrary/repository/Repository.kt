@@ -80,7 +80,6 @@ class Repository {
                     ref.removeEventListener(this)
                 }
             })
-
         }
 
         fun setPinjamMode(npm: String, value: String){
@@ -88,13 +87,16 @@ class Repository {
             ref.addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {
-                    val mhs = p0.getValue(Mahasiswa::class.java)
-                    mhs!!.mode_pinjam = value
-                    val ref2 = firebase()
-                        .child("data_mhs")
-                        .child(mhs.npm)
-                        .setValue(mhs)
-                    ref.removeEventListener(this)
+                    var mhs: Mahasiswa? = null
+                    mhs = p0.getValue(Mahasiswa::class.java)
+                    if(mhs!=null){
+                        mhs!!.mode_pinjam = value
+                        val ref2 = firebase()
+                            .child("data_mhs")
+                            .child(mhs.npm)
+                            .setValue(mhs)
+                        ref.removeEventListener(this)
+                    }
                 }
             })
         }

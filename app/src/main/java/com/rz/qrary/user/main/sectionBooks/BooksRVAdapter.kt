@@ -27,11 +27,15 @@ class BooksRVAdapter(option: FirebaseRecyclerOptions<Book>)
     override fun onBindViewHolder(holder: ViewHolder, position: Int, book: Book) {
         val issn = getRef(position).key.toString()
 //        Log.d("OnBindViewHolder", issn)
-        Repository.getBookDb().child(issn)
-            .addValueEventListener(object: ValueEventListener{
-                override fun onCancelled(p0: DatabaseError) { Log.d("OnCancelled", p0.message) }
-                override fun onDataChange(p0: DataSnapshot) { holder.bind(book) }
+        val ref = Repository.getBookDb().child(issn)
+        ref.addValueEventListener(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) { Log.d("OnCancelled", p0.message) }
+            override fun onDataChange(p0: DataSnapshot) {
+                holder.bind(book)
+                ref.removeEventListener(this)
+            }
         })
+
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

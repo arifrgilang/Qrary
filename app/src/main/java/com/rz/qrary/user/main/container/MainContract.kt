@@ -7,5 +7,6 @@ interface MainContract {
     }
     interface Presenter{
         fun setListener(npm: String)
+        fun destroyListener()
     }
 }

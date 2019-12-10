@@ -59,37 +59,42 @@ class ProfileFragment : Fragment() {
     }
 
     private fun initProfile(npm: String?) {
-        Repository.firebase().child("data_mhs").child(npm!!)
-            .addListenerForSingleValueEvent(object: ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {
-                    Log.d("Get Mahasiswa", p0.message)
-                }
+        val ref = Repository.firebase().child("data_mhs").child(npm!!)
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {
+                Log.d("Get Mahasiswa", p0.message)
+            }
 
-                override fun onDataChange(p0: DataSnapshot) {
-                    val mhs = p0.getValue(Mahasiswa::class.java)!!
-                    Glide.with(activity!!)
-                        .load(mhs.url_foto)
-                        .centerCrop()
-                        .into(foto_mhs)
-                    nama_mhs.text = mhs.nama
-                    npm_mhs.text = mhs.npm
-                }
-            })
+            override fun onDataChange(p0: DataSnapshot) {
+                val mhs = p0.getValue(Mahasiswa::class.java)!!
+                Glide.with(activity!!)
+                    .load(mhs.url_foto)
+                    .centerCrop()
+                    .into(foto_mhs)
+                nama_mhs.text = mhs.nama
+                npm_mhs.text = mhs.npm
+                ref.removeEventListener(this)
+            }
+        })
     }
 
     private fun getDipinjamCount(npm: String?) {
-        Repository.getDipinjamDb(npm!!).addValueEventListener(object: ValueEventListener{
+        val ref  = Repository.getDipinjamDb(npm!!)
+        ref.addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(p0: DataSnapshot) {
                 profile_dipinjam.text = "" + p0.childrenCount + " Buku"
+                ref.removeEventListener(this)
             }
         })
     }
     private fun getTerpinjamCount(npm: String?) {
-        Repository.getTerpinjamDb(npm!!).addValueEventListener(object: ValueEventListener{
+        val ref = Repository.getTerpinjamDb(npm!!)
+        ref.addValueEventListener(object: ValueEventListener{
             override fun onCancelled(p0: DatabaseError) {}
             override fun onDataChange(p0: DataSnapshot) {
                 profile_terpinjam.text = "" + p0.childrenCount + " Buku"
+                ref.removeEventListener(this)
             }
         })
     }

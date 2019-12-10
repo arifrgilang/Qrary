@@ -35,11 +35,14 @@ class PengunjungRVAdapter (val ctx: Context, option: FirebaseRecyclerOptions<Mah
         tanggalParsed+= temp.joinToString(":")
         Log.d("TanggalParsed", tanggalParsed)
 
-        Repository.getPengunjung().child(tanggal)
-            .addListenerForSingleValueEvent(object: ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) { Log.d("OnCancelled", p0.message) }
-                override fun onDataChange(p0: DataSnapshot) { holder.bind(ctx, mhs, tanggalParsed) }
-            })
+        val ref = Repository.getPengunjung().child(tanggal)
+        ref.addListenerForSingleValueEvent(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) { Log.d("OnCancelled", p0.message) }
+            override fun onDataChange(p0: DataSnapshot) { holder.bind(ctx, mhs, tanggalParsed)
+                // possible error
+            ref.removeEventListener(this)
+            }
+        })
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {

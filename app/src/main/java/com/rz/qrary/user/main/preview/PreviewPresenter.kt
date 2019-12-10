@@ -13,33 +13,36 @@ class PreviewPresenter(val mView: PreviewContract.View): PreviewContract.Present
     }
 
     override fun setListener(npm: String) {
-        Repository.firebase().child("data_mhs").child(npm)
-            .addValueEventListener(object: ValueEventListener {
-                override fun onCancelled(p0: DatabaseError) {}
-                override fun onDataChange(p0: DataSnapshot) {
-                    var mhs: Mahasiswa? = null
-                    mhs = p0.getValue(Mahasiswa::class.java)
-                    if(mhs!=null && mhs.mode_pinjam == "0"){
-                        Log.d("setlistener", mhs.mode_pinjam)
-                        mView.finishActivity()
-                    }
+        val ref = Repository.firebase().child("data_mhs").child(npm)
+        ref.addValueEventListener(object: ValueEventListener {
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                var mhs: Mahasiswa? = null
+                mhs = p0.getValue(Mahasiswa::class.java)
+                if(mhs!=null && mhs.mode_pinjam == "0"){
+                    Log.d("setlistener", mhs.mode_pinjam)
+                    mView.finishActivity()
+                    ref.removeEventListener(this)
                 }
-            })
+            }
+        })
+
     }
 
     override fun setModePinjamValue(npm: String, value: String) {
-        Repository.firebase().child("data_mhs").child(npm)
-            .addListenerForSingleValueEvent(object: ValueEventListener{
-                override fun onCancelled(p0: DatabaseError) {}
-                override fun onDataChange(p0: DataSnapshot) {
-                    var mhs: Mahasiswa? = null
-                    mhs = p0.getValue(Mahasiswa::class.java)
-                    if(mhs!=null){
-                        mhs.mode_pinjam = value
-                        Log.d("setmodepinjam", mhs.mode_pinjam)
-                        Repository.setPinjamMode(mhs.npm,value)
-                    }
+        val ref = Repository.firebase().child("data_mhs").child(npm)
+        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                var mhs: Mahasiswa? = null
+                mhs = p0.getValue(Mahasiswa::class.java)
+                if(mhs!=null){
+                    mhs.mode_pinjam = value
+                    Log.d("setmodepinjam", mhs.mode_pinjam)
+                    Repository.setPinjamMode(mhs.npm,value)
+                    ref.removeEventListener(this)
                 }
-            })
+            }
+        })
     }
 }

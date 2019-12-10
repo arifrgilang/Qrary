@@ -48,14 +48,15 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
                 npmMhs = ""
                 finish()
             }
-
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        mPresenter.setModePinjamValue(npmMhs, "0")
-        mPresenter.killListener()
+        if(npmMhs!= ""){
+            mPresenter.setModePinjamValue(npmMhs, "0")
+            mPresenter.killListener()
+        }
     }
 
     override fun setUserData(mhs: Mahasiswa) {

@@ -37,20 +37,21 @@ class DaftarPresenter(var ctx: DaftarActivity, var mView: DaftarContract.View): 
 
     private fun checkUrl(npm: String) {
         var mhs: Mahasiswa?
-        Repository.firebase().child("data_mhs").child(npm)
-            .addListenerForSingleValueEvent(object: ValueEventListener{
-                override fun onCancelled(p0: DatabaseError) {}
-                override fun onDataChange(p0: DataSnapshot) {
-                    mhs = p0.getValue(Mahasiswa::class.java)
-                    if (mhs != null){
-                        mView.showToast("NPM sudah terdaftar")
-                        mView.showLoading(false)
-                    } else {
-                        urlCheck(npm)
-                    }
+        val ref = Repository.firebase().child("data_mhs").child(npm)
+        ref.addListenerForSingleValueEvent(object: ValueEventListener{
+            override fun onCancelled(p0: DatabaseError) {}
+            override fun onDataChange(p0: DataSnapshot) {
+                mhs = p0.getValue(Mahasiswa::class.java)
+                if (mhs != null){
+                    mView.showToast("NPM sudah terdaftar")
+                    mView.showLoading(false)
+                    ref.removeEventListener(this)
+                } else {
+                    urlCheck(npm)
+                    ref.removeEventListener(this)
                 }
-            })
-
+            }
+        })
     }
 
     private fun urlCheck(npm: String){

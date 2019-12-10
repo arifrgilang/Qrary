@@ -41,5 +41,10 @@ class MainActivity : AppCompatActivity(), MainContract.View {
         startActivity(Intent(this, PreviewActivity::class.java))
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mPresenter.destroyListener()
+    }
+
     override fun finishActivity() = finish()
 }
