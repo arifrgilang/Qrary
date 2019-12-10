@@ -3,8 +3,10 @@ package com.rz.qrary.repository
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Log
+import android.widget.Toast
 import com.google.firebase.database.*
 import com.rz.qrary.login.LoginContract
+import com.rz.qrary.repository.model.Book
 import com.rz.qrary.repository.model.Mahasiswa
 import com.rz.qrary.util.Util
 
@@ -99,6 +101,50 @@ class Repository {
                     }
                 }
             })
+        }
+
+        fun addBookList(ctx: Context, issn: String, npm: String){
+            val ref = firebase().child("db_buku").child(issn)
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    val buku = p0.getValue(Book::class.java)
+                    if(buku!=null){
+                        Log.d("isListed", buku.issn)
+                        addBooktoConfirm(npm, issn)
+                        Toast.makeText(ctx, "Berhasil menambah Buku", Toast.LENGTH_SHORT).show()
+                        ref.removeEventListener(this)
+                    } else {
+                        Toast.makeText(ctx, "ISSN buku tidak tercatat di Database!", Toast.LENGTH_SHORT).show()
+                        ref.removeEventListener(this)
+                    }
+                }
+            })
+        }
+
+        private fun addBooktoConfirm(npm: String, issn: String): Boolean{
+            var condition = false
+            val ref = firebase().child("db_buku").child(issn)
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    var buku: Book? = null
+                    buku = p0.getValue(Book::class.java)
+                    if(buku!=null){
+                        Log.d("addbuku", buku.issn)
+                        val ref2 = firebase()
+                            .child("list_konfirm")
+                            .child(npm)
+                            .child(buku.issn)
+                            .setValue(buku)
+                        condition = true
+                        ref.removeEventListener(this)
+                    } else{
+                        condition = false
+                    }
+                }
+            })
+            return condition
         }
     }
 }

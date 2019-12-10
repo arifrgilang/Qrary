@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.rz.qrary.R
+import com.rz.qrary.repository.Repository
 import com.rz.qrary.repository.model.Mahasiswa
 import kotlinx.android.synthetic.main.activity_konfirmasi.*
 import me.ydcool.lib.qrmodule.activity.QrScannerActivity
@@ -17,6 +18,7 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
     private var peminjam: Mahasiswa? = null
     lateinit private var mPresenter: KonfirmasiContract.Presenter
     lateinit private var npmMhs: String
+    private val ADD_BOOK = 300
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,6 +27,11 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
         if (peminjam == null){
             val intent = Intent(this, QrScannerActivity::class.java)
             startActivityForResult(intent, QrScannerActivity.QR_REQUEST_CODE)
+        }
+
+        tambah_konfirmasi.setOnClickListener {
+            val intent = Intent(this, QrScannerActivity::class.java)
+            startActivityForResult(intent, ADD_BOOK)
         }
     }
 
@@ -47,6 +54,14 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
                 Toast.makeText(this, "Scan dibatalkan", Toast.LENGTH_SHORT).show()
                 npmMhs = ""
                 finish()
+            }
+        } else if(requestCode == ADD_BOOK){
+            if(resultCode == Activity.RESULT_OK) {
+                val issn = data!!.extras!!.getString(QrScannerActivity.QR_RESULT_STR)
+                Log.d("ADDBOOK", issn!!)
+                Repository.addBookList(this, issn, npmMhs)
+            } else {
+                Toast.makeText(this, "Scan dibatalkan", Toast.LENGTH_SHORT).show()
             }
         }
     }
