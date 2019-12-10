@@ -36,7 +36,7 @@
         android:layout_height="0dp"
         android:gravity="center_horizontal|center_vertical"
         android:layout_weight="1"
-        android:text="Buku yang telah dipinjam"/>
+        android:text="Buku yang terakhir kali dikembalikan"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

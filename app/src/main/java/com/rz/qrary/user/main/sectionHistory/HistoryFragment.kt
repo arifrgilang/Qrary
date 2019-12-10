@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
 import com.rz.qrary.R
@@ -27,7 +28,7 @@ class HistoryFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         val npm = Repository.localDb(activity!!).getString(Repository.NPM,"")!!
         // Sedang Dipinjam
-        rv_sedang_dipinjam.layoutManager = GridLayoutManager(activity, 2)
+        rv_sedang_dipinjam.layoutManager = LinearLayoutManager(activity)
         val optionSedang = FirebaseRecyclerOptions.Builder<Book>()
             .setQuery(Repository.getDipinjamDb(npm), Book::class.java)
             .build()
@@ -35,7 +36,7 @@ class HistoryFragment : Fragment() {
         rv_sedang_dipinjam.adapter = mDipinjamAdapter
         mDipinjamAdapter.startListening()
         // Telah Dipinjam
-        rv_telah_dipinjam.layoutManager = GridLayoutManager(activity, 2)
+        rv_telah_dipinjam.layoutManager = LinearLayoutManager(activity)
         val optionTelah = FirebaseRecyclerOptions.Builder<Book>()
             .setQuery(Repository.getTerpinjamDb(npm), Book::class.java)
             .build()

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DefaultItemAnimator
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.firebase.ui.database.FirebaseRecyclerOptions
 
 import com.rz.qrary.R
@@ -24,7 +25,7 @@ class BooksFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        books_rv.layoutManager = GridLayoutManager(activity, 2)
+        books_rv.layoutManager = LinearLayoutManager(activity)
         books_rv.itemAnimator = DefaultItemAnimator()
 
         val option = FirebaseRecyclerOptions.Builder<Book>()

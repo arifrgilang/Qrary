@@ -116,7 +116,7 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Buku yang telah dipinjam" />
+                    android:text="Buku yang terakhir kali dikembalikan" />
                 <TextView
                     android:id="@+id/profile_terpinjam"
                     android:layout_width="wrap_content"

@@ -153,6 +153,19 @@ class Repository {
             ref.removeValue()
         }
 
+        fun checkIfStillMinjam(ctx: Activity, npm: String){
+            val ref = firebase().child("pinjam_history")
+            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+                override fun onCancelled(p0: DatabaseError) {}
+                override fun onDataChange(p0: DataSnapshot) {
+                    if(p0.hasChild(npm)){
+                        Toast.makeText(ctx, "User masih meminjam buku!", Toast.LENGTH_SHORT).show()
+                        ctx.finish()
+                    }
+                }
+            })
+        }
+
         fun confirmPeminjaman(ctx: Activity, npm: String){
             val refAsal = firebase().child("list_konfirm").child(npm)
             val refTujuan = firebase().child("pinjam_history").child(npm)
@@ -174,14 +187,21 @@ class Repository {
             })
         }
 
-        fun checkIfStillMinjam(ctx: Activity, npm: String){
-            val ref = firebase().child("pinjam_history")
-            ref.addListenerForSingleValueEvent(object: ValueEventListener{
+        fun moveToSelesai(ctx: Activity, npm: String){
+            val refAsal = firebase().child("pinjam_history").child(npm)
+            val refTujuan = firebase().child("terpinjam_history").child(npm)
+            refAsal.addListenerForSingleValueEvent(object: ValueEventListener{
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {
-                    if(p0.hasChild(npm)){
-                        Toast.makeText(ctx, "User masih meminjam buku!", Toast.LENGTH_SHORT).show()
-                        ctx.finish()
+//                    refTujuan.push().setValue(p0.value)
+                    refTujuan.setValue(p0.value
+                    ) { p0, p1 ->
+                        if (p0 == null){
+                            refAsal.setValue(null)
+                        } else {
+                            Log.d("confirmPinjam", "Failed")
+                            ctx.finish()
+                        }
                     }
                 }
             })

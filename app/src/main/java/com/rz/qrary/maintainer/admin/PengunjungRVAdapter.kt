@@ -1,6 +1,7 @@
 package com.rz.qrary.maintainer.admin
 
 import android.content.Context
+import android.content.Intent
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.ValueEventListener
 import com.rz.qrary.R
+import com.rz.qrary.maintainer.detailpeminjam.DetailPeminjamActivity
 import com.rz.qrary.repository.model.Mahasiswa
 import com.rz.qrary.repository.Repository
 import kotlinx.android.synthetic.main.mhs_viewholder.view.*

@@ -17,14 +17,19 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name=".user.main.preview.PreviewActivity"></activity>
+        <activity
+            android:name=".maintainer.detailpeminjam.DetailPeminjamActivity">
+        </activity>
+        <activity
+            android:name=".user.main.preview.PreviewActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".maintainer.konfirmasi.KonfirmasiActivity"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".maintainer.daftar.DaftarActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:windowSoftInputMode="adjustResize"></activity>
+            android:windowSoftInputMode="adjustResize" />
         <activity
             android:name=".maintainer.admin.MaintainerActivity"
             android:theme="@style/AppTheme.NoActionBar" />

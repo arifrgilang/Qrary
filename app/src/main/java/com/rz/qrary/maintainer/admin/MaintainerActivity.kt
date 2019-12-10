@@ -21,6 +21,7 @@ import me.ydcool.lib.qrmodule.activity.QrScannerActivity
 class MaintainerActivity : AppCompatActivity() {
 
     lateinit private var pengunjungAdapter: PengunjungRVAdapter
+    lateinit private var peminjamAdapter: PeminjamRVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,6 +51,17 @@ class MaintainerActivity : AppCompatActivity() {
         pengunjungAdapter.startListening()
 
         // Peminjam RecyclerView
+        val layoutManager2 = LinearLayoutManager(this)
+        layoutManager2.reverseLayout = true
+        layoutManager2.stackFromEnd = true
+        rv_peminjam.layoutManager = layoutManager2
+        rv_peminjam.itemAnimator = DefaultItemAnimator()
+        val option2 = FirebaseRecyclerOptions.Builder<Mahasiswa>()
+            .setQuery(Repository.firebase().child("pinjam_history"), Mahasiswa::class.java)
+            .build()
+        peminjamAdapter = PeminjamRVAdapter(this, option2)
+        rv_peminjam.adapter = peminjamAdapter
+        peminjamAdapter.startListening()
 
         // Button Logout
         logout_admin_button.setOnClickListener {
