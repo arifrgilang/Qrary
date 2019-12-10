@@ -5,10 +5,16 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.GridLayout
 import android.widget.Toast
+import androidx.recyclerview.widget.DefaultItemAnimator
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.firebase.ui.database.FirebaseRecyclerOptions
 import com.rz.qrary.R
 import com.rz.qrary.repository.Repository
+import com.rz.qrary.repository.model.Book
 import com.rz.qrary.repository.model.Mahasiswa
 import kotlinx.android.synthetic.main.activity_konfirmasi.*
 import me.ydcool.lib.qrmodule.activity.QrScannerActivity
@@ -18,6 +24,7 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
     private var peminjam: Mahasiswa? = null
     lateinit private var mPresenter: KonfirmasiContract.Presenter
     lateinit private var npmMhs: String
+    private var mAdapter: QueueRvAdapter? = null
     private val ADD_BOOK = 300
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +42,21 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
         }
     }
 
+    private fun initRV(){
+        val layoutManager = LinearLayoutManager(this)
+        layoutManager.reverseLayout = true
+        layoutManager.stackFromEnd = true
+        rv_konfirmasi.layoutManager = layoutManager
+        rv_konfirmasi.itemAnimator = DefaultItemAnimator()
+        val option = FirebaseRecyclerOptions.Builder<Book>()
+            .setQuery(Repository.firebase().child("list_konfirm").child(npmMhs),
+                Book::class.java)
+            .build()
+        mAdapter = QueueRvAdapter(npmMhs, option)
+        rv_konfirmasi.adapter = mAdapter
+        mAdapter!!.startListening()
+    }
+
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         if(requestCode == QrScannerActivity.QR_REQUEST_CODE){
@@ -46,6 +68,7 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
                     // Get user data and set mode_pinjam
                     npmMhs = npm.substring(5)
                     mPresenter.getUserData(npmMhs)
+                    initRV()
                     Toast.makeText(this, "Peminjam ditambahkan", Toast.LENGTH_SHORT).show()
                 } else {
                     Toast.makeText(this, "QR Code tidak terdaftar!", Toast.LENGTH_SHORT).show()
@@ -69,8 +92,10 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
     override fun onDestroy() {
         super.onDestroy()
         if(npmMhs!= ""){
+            mAdapter = null
             mPresenter.setModePinjamValue(npmMhs, "0")
             mPresenter.killListener()
+            Repository.removeTempList(npmMhs)
         }
     }
 

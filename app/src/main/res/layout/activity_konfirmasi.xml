@@ -90,7 +90,7 @@
     </LinearLayout>
 
     <TextView
-        android:text="Buku yang Dipinjam"
+        android:text="Buku yang akan Dipinjam"
         android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"/>

@@ -146,5 +146,10 @@ class Repository {
             })
             return condition
         }
+
+        fun removeTempList(npm: String){
+            val ref = firebase().child("list_konfirm").child(npm)
+            ref.removeValue()
+        }
     }
 }
