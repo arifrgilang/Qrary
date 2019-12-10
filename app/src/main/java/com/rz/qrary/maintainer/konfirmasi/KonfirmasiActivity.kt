@@ -21,6 +21,7 @@ import me.ydcool.lib.qrmodule.activity.QrScannerActivity
 
 class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
 
+    private var count = 0
     private var peminjam: Mahasiswa? = null
     lateinit private var mPresenter: KonfirmasiContract.Presenter
     lateinit private var npmMhs: String
@@ -39,6 +40,15 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
         tambah_konfirmasi.setOnClickListener {
             val intent = Intent(this, QrScannerActivity::class.java)
             startActivityForResult(intent, ADD_BOOK)
+        }
+
+        selesai_konfirmasi.setOnClickListener {
+            if(count>0){
+                val dialog = ConfirmFragment()
+                dialog.show(supportFragmentManager, ConfirmFragment().tag)
+            } else {
+                Toast.makeText(this, "Belum ada buku yang ditambahkan!", Toast.LENGTH_SHORT).show()
+            }
         }
     }
 
@@ -83,6 +93,7 @@ class KonfirmasiActivity : AppCompatActivity(), KonfirmasiContract.View {
                 val issn = data!!.extras!!.getString(QrScannerActivity.QR_RESULT_STR)
                 Log.d("ADDBOOK", issn!!)
                 Repository.addBookList(this, issn, npmMhs)
+                count++
             } else {
                 Toast.makeText(this, "Scan dibatalkan", Toast.LENGTH_SHORT).show()
             }
